@@ -14,7 +14,7 @@ http.createServer(function(req, res) {
       break;
       
       case '/publish':
-      chat.publish();
+      chat.publish('kuku!');
       break;
 
     default:
