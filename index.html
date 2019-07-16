@@ -4,13 +4,13 @@
 
     <form id='publish' class='form-inline'>
       <input type='text' name='message'/>
-      <input type='text' class='btn btn-primary' value='send'/>
+      <input type='submit' class='btn btn-primary' value='send'/>
     </form>
 
     <ul id='messages'></ul>
 
     <script>
-      
+
       publish.onsubmit = function() {
         var xhr = new XMLHttpRequest();
 
