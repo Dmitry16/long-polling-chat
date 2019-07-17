@@ -16,18 +16,30 @@ http.createServer(function(req, res) {
     break;
       
     case '/publish':
-      let body = ''; let chank = '';
+      let body = ''; 
+      let chank = '';
 
       req
         .on('readable', function() {
           chank = req.read();
           if (chank)
             body += chank;
+          if (body.length > 1e4) {
+            res.statusCode = 413;
+            res.end('the message is too big!');
+          }
         })
         .on('end', function() {
-          body = JSON.parse(body);
-          chat.publish(body.message);
-          res.end('OK');
+          try {
+            body = JSON.parse(body);
+            chat.publish(body.message);
+            res.end('OK');
+          } catch(err) {
+            console.log('errorrr::', err);
+            res.statusCode = 400;
+            res.end('Bad request');
+            return;
+          }
         });
     break;
 

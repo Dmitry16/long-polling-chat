@@ -42,6 +42,7 @@
         };
 
         xhr.onerror = xhr.onabort = function() {
+          console.error('Error::', xhr.statusText);
           setTimeout(subscribe, 500);
         };
 

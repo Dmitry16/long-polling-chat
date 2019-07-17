@@ -1,8 +1,12 @@
 let clients = [];
 
 exports.subscribe = function(req, res) {
-  console.log('chat.js::subscribe()');
   clients.push(res);
+  res.on('close', function() {
+    clients.splice(clients.indexOf(res), 1);
+  });
+  
+  console.log('chat.js::subscribe()::clients.length::', clients.length);
 };
 
 exports.publish = function(message) {
